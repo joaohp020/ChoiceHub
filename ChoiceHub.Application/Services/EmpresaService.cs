@@ -1,15 +1,16 @@
 ﻿using ChoiceHub.Application.DTOs;
+using ChoiceHub.Application.Interfaces;
 using ChoiceHub.Domain.Entities;
 
 namespace ChoiceHub.Application.Services
 {
-	public class EmpresaService
+	public class EmpresaService : IEmpresaService
 	{
 		private readonly List<Empresa> _empresa = new();
 
 		public EmpresaService() { }
 
-		public EmpresaDto Criar(string nome, string cnpj)
+		public Task<EmpresaDto> Criar(string nome, string cnpj)
 		{
 			var novaEmpresa = new Empresa
 			{
@@ -21,22 +22,22 @@ namespace ChoiceHub.Application.Services
 
 			_empresa.Add(novaEmpresa);
 
-			return new EmpresaDto
+			return Task.FromResult(new EmpresaDto
 			{
 				Id = novaEmpresa.Id,
 				RazaoSocial = novaEmpresa.RazaoSocial,
 				Cnpj = novaEmpresa.Cnpj
-			};
+			});
 		}
 
-		public List<EmpresaDto> Listar()
+		public Task<List<EmpresaDto>> Listar()
 		{
-			return _empresa.Select(e => new EmpresaDto
+			return Task.FromResult(_empresa.Select(e => new EmpresaDto
 			{
 				Id = e.Id,
 				RazaoSocial = e.RazaoSocial,
 				Cnpj = e.Cnpj
-			}).ToList();
+			}).ToList());
 		}
 	}
 }
