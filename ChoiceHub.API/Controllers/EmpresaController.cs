@@ -1,4 +1,5 @@
 ﻿using ChoiceHub.Application.DTOs;
+using ChoiceHub.Application.Interfaces;
 using ChoiceHub.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +9,9 @@ namespace ChoiceHub.API.Controllers
 	[Route("api/[controller]")]
 	public class EmpresaController : ControllerBase
 	{
-		private readonly EmpresaService _empresaService;
+		private readonly IEmpresaService _empresaService;
 
-		public EmpresaController(EmpresaService empresaService)
+		public EmpresaController(IEmpresaService empresaService)
 		{
 			_empresaService = empresaService;
 		}
