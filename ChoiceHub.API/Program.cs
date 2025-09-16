@@ -1,6 +1,13 @@
 using ChoiceHub.Application.Interfaces;
+using ChoiceHub.Application.Services;
+using ChoiceHub.Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Infrastructure
+builder.Services.AddDbContext<AppDbContext>(options =>
+	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 
@@ -9,7 +16,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IEmpresaService, IEmpresaService>();
+// Application Services
+builder.Services.AddScoped<IEmpresaService, EmpresaService>();
 
 var app = builder.Build();
 

@@ -10,13 +10,15 @@ namespace ChoiceHub.Application.Services
 
 		public EmpresaService() { }
 
-		public Task<EmpresaDto> Criar(string nome, string cnpj)
+		public Task<EmpresaDto> Criar(string nome, string cnpj, string telefone, string email)
 		{
 			var novaEmpresa = new Empresa
 			{
 				Id = _empresa.Count + 1,
 				RazaoSocial = nome,
 				Cnpj = cnpj,
+				Telefone = telefone,
+				Email = email,
 				Status = 1
 			};
 
