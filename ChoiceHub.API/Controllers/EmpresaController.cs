@@ -19,7 +19,7 @@ namespace ChoiceHub.API.Controllers
 		[HttpPost]
 		public IActionResult CriarEmpresa([FromBody] EmpresaDto dto)
 		{
-			var result = _empresaService.Criar(dto.RazaoSocial, dto.Cnpj);
+			var result = _empresaService.Criar(dto.RazaoSocial, dto.Cnpj, dto.Telefone, dto.Email);
 			return Ok(result);
 		}
 
